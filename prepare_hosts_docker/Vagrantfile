@@ -1,0 +1,51 @@
+ISO = "centos/7"
+NET = "192.168.56."
+
+servers = [
+  {
+    :hostname => "clickhouse",
+    :ip => NET + "2",
+    :ssh_host => "20011",
+    :ssh_vm => "22",
+    :ram => 1024,
+    :core => 1
+  }
+  {
+    :hostname => "vector",
+    :ip => NET + "3",
+    :ssh_host => "20012",
+    :ssh_vm => "22",
+    :ram => 1024,
+    :core => 1
+  }
+  {
+    :hostname => "clickhouse",
+    :ip => NET + "4",
+    :ssh_host => "20013",
+    :ssh_vm => "22",
+    :ram => 1024,
+    :core => 1
+  }
+]
+
+Vagrant.configure("2") do |config|
+  config.vm.synced_folder ".", "/vagrant", disabled: false
+  servers.each do |machine|
+    config.vm.define machine[:hostname] do |node|
+      node.vm.box = ISO
+      node.vm.hostname = machine[:hostname]
+      node.vm.network "private_network", ip: machine[:ip]
+      node.vm.network :forwarded_port, guest: machine[:ssh_vm], host: machine[:ssh_host]
+      node.vm.provider "virtualbox" do |vb|
+        vb.customize ["modifyvm", :id, "--memory", machine[:ram]]
+        vb.customize ["modifyvm", :id, "--cpus", machine[:core]]
+        vb.name = machine[:hostname]
+      end
+      config.vm.provision "shell", inline: <<-SHELL
+        sudo yum update -y &&
+        sudo yum install -y https://centos7.iuscommunity.org/ius-release.rpm &&
+        sudo yum install -y python36u python36u-pip
+      SHELL
+    end
+  end
+end

@@ -1,0 +1,14 @@
+- name: clickhouse
+  src: git@github.com:AlexeySetevoi/ansible-clickhouse.git
+  scm: git
+  version: "1.13"
+
+- name: vector
+  src: git@github.com:SergueiMoscow/Ansible_vector_role.git
+  scm: git
+  version: 1.0.0
+
+- name: lighthouse
+  src: git@github.com:SergueiMoscow/Ansible_lighthouse_role.git
+  scm: git
+  version: 1.0.0

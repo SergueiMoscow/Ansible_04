@@ -1,0 +1,24 @@
+clickhouse:
+  hosts:
+#    clickhouse_c:
+#      ansible_connection: docker
+    clickhouse_yc:
+      ansible_host: ${clickhouse_ip}
+      ansible_user: ${username}
+
+
+vector:
+  hosts:
+#    vector_c:
+#      ansible_connection: docker
+    vector_yc:
+      ansible_host: ${vector_ip}
+      ansible_user: ${username}
+
+lighthouse:
+  hosts:
+#    lighthouse_c:
+#      ansible_connection: docker
+    lighthouse_yc:
+      ansible_host: ${lighthouse_ip}
+      ansible_user: ${username}

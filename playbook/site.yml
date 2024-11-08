@@ -1,0 +1,20 @@
+---
+# Playbook для установки Clickhouse и Vector на серверах, управляемых Ansible
+
+# Clickhouse
+- name: Install Clickhouse
+  hosts: clickhouse
+  roles:
+    - clickhouse
+
+# Vector
+- name: Install vector
+  hosts: vector
+  roles:
+    - vector
+
+# Lighthouse with Nginx
+- name: Install Lighthouse
+  hosts: lighthouse
+  roles:
+    - lighthouse

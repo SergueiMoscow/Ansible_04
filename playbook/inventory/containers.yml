@@ -1,0 +1,14 @@
+clickhouse:
+  hosts:
+    clickhouse_c:
+      ansible_connection: docker
+
+vector:
+  hosts:
+    vector_c:
+      ansible_connection: docker
+
+lighthouse:
+  hosts:
+    lighthouse_c:
+      ansible_connection: docker

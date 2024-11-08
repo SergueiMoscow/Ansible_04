@@ -1,0 +1,19 @@
+services:
+  clickhouse:
+    build:
+      dockerfile: Dockerfile.debian
+    # image: python:3.12-slim-bookworm
+    container_name: clickhouse_c
+    command: sleep infinity
+  vector:
+    build:
+      dockerfile: Dockerfile.almalinux
+    container_name: vector_c
+    command: sleep infinity
+  lighthouse:
+    build:
+      dockerfile: Dockerfile.almalinux
+    ports:
+      - 80:80
+    container_name: lighthouse_c
+    command: sleep infinity
